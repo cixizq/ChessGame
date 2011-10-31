@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Commencer une nouvelle partie</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/chess.css" />
+    </head>
+    <body>
+        <div id="header">
+            <p>Jeu d'échec</p>
+        </div>
+        <div id="wrap">
+            <h1>Création d'une nouvelle partie</h1>
+
+            <form id="newgame_form" action="#" method="post">
+                <p>Pseudonyme</p>
+                <p><input type="text" id="newgame_pseudo" name="newgame[pseudo]" /></p>
+                <p>Couleur</p>
+                <p>
+                    <input type="radio" name="newgame[color]" id="newgame_color_black" value="black" /> Noir
+                    <input type="radio" name="newgame[color]" id="newgame_color_white" value="white" /> Blanc
+                </p>
+                <p>
+                    <input type="submit" /> <input type="reset" />
+                </p>
+            </form>
+        </div>
+    </body>
+</html>
