@@ -1,0 +1,23 @@
+#board {
+    width: 440px;
+    height: 400px;
+    margin: 15px auto;
+}
+
+#board > div {
+    width: 55px;
+    height: 55px;
+    float: left;
+}
+
+#board div.white {
+    background-color: #eee;
+}
+
+#board div.black {
+    background-color: #888;
+}
+
+#board > div > img {
+    width: 95%;
+}

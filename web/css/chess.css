@@ -1,0 +1,13 @@
+body {
+  font: 1em Georgia, "Times New Roman", serif;
+  color: #626262;
+  text-align: left;
+}
+
+h1, h2, h3, h4 {
+  font: 1em Georgia, "Times New Roman", serif;
+}
+
+a {
+  color: #21A6A4;
+}
