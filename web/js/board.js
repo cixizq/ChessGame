@@ -106,6 +106,17 @@ board.initialize = function()
     for (position in this.pieces) {
         board.addPiece(position, this.pieces[position]);
     }
+
+    $('#board > div > img').draggable({
+        opacity: 0.8,
+        revert:  'invalid',
+        scroll:  false
+    });
+
+    $("#board > div").droppable({
+        drop: function(event, ui) {
+        }
+    });
 }
 
 // Evenements
