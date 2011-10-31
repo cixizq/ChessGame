@@ -110,11 +110,21 @@ board.initialize = function()
     $('#board > div > img').draggable({
         opacity: 0.8,
         revert:  'invalid',
-        scroll:  false
+        scroll:  false,
+        cursor: 'move',
+        zIndex: 10
     });
 
     $("#board > div").droppable({
         drop: function(event, ui) {
+            // On doit regarder s'il n'y a pas déjà une pièce
+            $(this).append(ui.draggable);
+
+            $(ui.draggable).css({
+                position: 'relative',
+                left: 0,
+                top: 0
+            });
         }
     });
 }
