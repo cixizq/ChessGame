@@ -82,6 +82,32 @@ board.isValidMove = function(obj, src, dst)
 }
 
 /**
+ * Désactive le drag&drop pour les pièces du joueur
+ * en cours
+ */
+board.disableDragAndDrop = function()
+{
+    if (board.userColor == undefined) {
+        return;
+    }
+
+    $('#board > div > img.piece_' + board.userColor).draggable("option", "disabled", true);
+}
+
+/**
+ * Active le drag&drop pour les pièces du joueur
+ * en cours
+ */
+board.enableDragAndDrop = function()
+{
+    if (board.userColor == undefined) {
+        return;
+    }
+
+    $('#board > div > img.piece_' + board.userColor).draggable("option", "disabled", false);
+}
+
+/**
  * Initialisation du plateau de jeu
  */
 board.initialize = function()
@@ -139,31 +165,22 @@ board.initialize = function()
     });
 
     $("#board > div").droppable({
+        accept: function(el) {
+            // TODO: Il faut ici déterminer si le coup est bon
+            return true;
+        },
         drop: function(event, ui) {
-            var src = $(ui.draggable).parent();
-            var obj = $(ui.draggable);
-            var dst = $(this);
+            $(this).append(ui.draggable);
 
-            if (board.isValidMove(obj, src, dst)) {
-                // Le mouvement est correct
-                $(this).append(ui.draggable);
-
-                $(ui.draggable).css({
-                    position: 'relative',
-                    left: 0,
-                    top: 0
-                });
-            } else {
-                // Le mouvement n'est pas valide donc on retourne
-                // à la position de départ !
-                $(ui.draggable).draggable( "option", "revert", true );
-            }
+            $(ui.draggable).css({
+                position: 'relative',
+                left: 0,
+                top: 0
+            });
         },
         hoverClass: 'case-hover'
     });
 }
-
-// Evenements
 
 $(document).ready(function() {
     board.resize();
