@@ -30,8 +30,10 @@ public class NewGame extends HttpServlet
         String nick  = request.getParameter("nick");
         String color = request.getParameter("color");
 
-        // Vérification
-        if (nick == null || nick.isEmpty() || color == null) {
+        // Il est important de vérifier que la couleur soit bien (white|black)
+        // Il est possible que l'utilisateur ai modifié le formulaire pour mettre une autre
+        // valeur, ce qui serait très dérangeant pour la suite du programme
+        if (nick == null || nick.isEmpty() || color == null || (!color.equals("white") && !color.equals("black"))) {
             response.sendRedirect("index.html");
             return;
         }

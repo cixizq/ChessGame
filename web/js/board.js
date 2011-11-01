@@ -15,6 +15,8 @@ Piece.prototype.getPathImage = function()
 
 var board = new Object();
 
+board.userColor = undefined;
+
 board.resize = function()
 {
     var width = 0.8 * $(document).width();
@@ -57,6 +59,9 @@ board.addPiece = function(position, piece)
         src:   piece.getPathImage(),
         title: piece.type
     });
+
+    img.addClass('piece_' + piece.color);
+    img.addClass('piece_' + piece.type);
 
     img.appendTo(_case);
 }
@@ -107,7 +112,7 @@ board.initialize = function()
         board.addPiece(position, this.pieces[position]);
     }
 
-    $('#board > div > img').draggable({
+    $('#board > div > img.piece_' + board.userColor).draggable({
         opacity: 0.8,
         revert:  'invalid',
         scroll:  false,

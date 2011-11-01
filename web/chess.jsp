@@ -4,13 +4,16 @@
     <head>
         <title>Chess game</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.8.16.min.js"></script>
-        <script type="text/javascript" src="js/board.js"></script>
-
         <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="css/chess.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="css/board.css" />
+
+        <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.16.min.js"></script>
+        <script type="text/javascript" src="js/board.js"></script>
+        <script type="text/javascript">
+            board.userColor = '<%= session.getAttribute("color") %>';
+        </script>
     </head>
     <body>
         <jsp:useBean id="game" scope="session" class="chess.entity.Game" />
