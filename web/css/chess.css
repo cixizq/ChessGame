@@ -4,16 +4,17 @@ html, body {
 }
 
 body {
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
-    color: #626262;
+    color: #402C2B;
     text-align: left;
     line-height: 1.5;
 }
 
 h1, h2, h3, h4 {
-    padding-left: 20px;
+    padding-left: 25px;
     margin: 10px 0;
+    color: #4A323C;
 }
 
 h1 {
@@ -25,19 +26,83 @@ a {
 }
 
 #header {
-    background-color: #4e4e4e;
-    height: 40px;
+    height: 25px;
     margin-bottom: 20px;
-}
-
-#header p {
-    font-weight: bold;
-    color: #fff;
-    float: right;
-    margin: 10px 50px 0 0;
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    background-color: #644d52;
 }
 
 #wrap {
     width: 800px;
     margin: 0 auto;
+}
+
+/* Form */
+
+.form p {
+    clear: left;
+    margin-bottom: 5px;
+    padding: 5px 0 8px 0;
+    padding-left: 155px;
+}
+
+.form label {
+    font-weight: bold;
+    float: left;
+    margin-left: -145px;
+    margin-top: 3px;
+    width: 130px;
+    text-align: right;
+}
+
+.form span {
+    padding-right: 10px;
+}
+
+.form input[type="text"] {
+    width: 180px;
+    height: 20px;
+}
+
+.form input[type="radio"] {
+    margin-top: 5px;
+}
+
+.cssform textarea {
+    width: 250px;
+    height: 150px;
+}
+
+.button, .button:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 5px 10px 6px;
+    color: #fff;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    position: relative;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.button:hover {
+    background-color: #111;
+    color: #fff;
+}
+
+.button:active {
+    top: 1px;
+}
+
+.buttons {
+    margin-top: 15px;
 }

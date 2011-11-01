@@ -4,26 +4,30 @@
     <head>
         <title>Commencer une nouvelle partie</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="js/chess.js"></script>
+
         <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="css/chess.css" />
     </head>
     <body>
         <div id="header">
-            <p>Jeu d'échec</p>
         </div>
         <div id="wrap">
             <h1>Création d'une nouvelle partie</h1>
 
-            <form id="newgame_form" action="#" method="post">
-                <p>Pseudonyme</p>
-                <p><input type="text" id="newgame_pseudo" name="newgame[pseudo]" /></p>
-                <p>Couleur</p>
+            <form id="newgame_form" action="newgame" method="post" class="form">
                 <p>
-                    <input type="radio" name="newgame[color]" id="newgame_color_black" value="black" /> Noir
-                    <input type="radio" name="newgame[color]" id="newgame_color_white" value="white" /> Blanc
+                    <label for="nick">Prénom</label>
+                    <input type="text" id="nick" value="" />
                 </p>
                 <p>
-                    <input type="submit" /> <input type="reset" />
+                    <label for="comments">Couleur</label>
+                    <input type="radio" name="color" value="white"/> <span>Blanc</span> <input type="radio" name="color" value="black"/> <span>Noir</span>
+                </p>
+                <p class="buttons">
+                    <a class="button" href="#">Créer la partie !</a>
                 </p>
             </form>
         </div>
