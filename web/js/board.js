@@ -6,6 +6,9 @@ function Piece(type, color)
     this.type = type;
 }
 
+/**
+ * Retourne le chemin vers l'image
+ */
 Piece.prototype.getPathImage = function()
 {
     return 'images/pieces/' + this.color + '/' + this.type + '.png';
@@ -17,6 +20,10 @@ var board = new Object();
 
 board.userColor = undefined;
 
+/**
+ * Redimensionne le plateau de jeu en fonction de la taille
+ * de la fenêtre
+ */
 board.resize = function()
 {
     var width = 0.8 * $(document).width();
@@ -66,6 +73,17 @@ board.addPiece = function(position, piece)
     img.appendTo(_case);
 }
 
+/**
+ * Regarde si le mouvement est correct
+ */
+board.isValidMove = function(obj, src, dst)
+{
+    return true;
+}
+
+/**
+ * Initialisation du plateau de jeu
+ */
 board.initialize = function()
 {
     this.pieces = new Array();
@@ -122,14 +140,24 @@ board.initialize = function()
 
     $("#board > div").droppable({
         drop: function(event, ui) {
-            // On doit regarder s'il n'y a pas déjà une pièce
-            $(this).append(ui.draggable);
+            var src = $(ui.draggable).parent();
+            var obj = $(ui.draggable);
+            var dst = $(this);
 
-            $(ui.draggable).css({
-                position: 'relative',
-                left: 0,
-                top: 0
-            });
+            if (board.isValidMove(obj, src, dst)) {
+                // Le mouvement est correct
+                $(this).append(ui.draggable);
+
+                $(ui.draggable).css({
+                    position: 'relative',
+                    left: 0,
+                    top: 0
+                });
+            } else {
+                // Le mouvement n'est pas valide donc on retourne
+                // à la position de départ !
+                $(ui.draggable).draggable( "option", "revert", true );
+            }
         },
         hoverClass: 'case-hover'
     });
