@@ -21,3 +21,9 @@
 #board > div > img {
     width: 95%;
 }
+
+#board div.case-hover {
+    background-position: center center;
+    background-image: url(../images/hover.png);
+    background-repeat:no-repeat;
+}

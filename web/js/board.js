@@ -130,7 +130,8 @@ board.initialize = function()
                 left: 0,
                 top: 0
             });
-        }
+        },
+        hoverClass: 'case-hover'
     });
 }
 
