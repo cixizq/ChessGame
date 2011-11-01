@@ -13,6 +13,20 @@
         <link rel="stylesheet" type="text/css" media="screen" href="css/board.css" />
     </head>
     <body>
+        <jsp:useBean id="game" scope="session" class="chess.entity.Game" />
+        <%
+            if (!game.isInitialized()) {
+                // L'utilisateur n'a pas créé une partie
+                response.sendRedirect("index.html");
+            }
+        %>
+        <div id="header">
+        </div>
+
+        <div id="informations">
+            <p>Bienvenue <%= session.getAttribute("nick") %> </p>
+        </div>
+
         <div id="board">
             <div id="_8A" class="white"></div>
             <div id="_8B" class="black"></div>
