@@ -27,7 +27,7 @@
         </div>
 
         <div id="informations">
-            <p>Bienvenue <%= session.getAttribute("nick") %> </p>
+            <a href="#" class="button red large">Abandonner</a>
         </div>
 
         <div id="board">

@@ -37,6 +37,11 @@ a {
     margin: 0 auto;
 }
 
+#informations {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
 /* Form */
 
 .form p {
@@ -73,6 +78,8 @@ a {
     height: 150px;
 }
 
+/* Buttons */
+
 .button, .button:visited {
     background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
@@ -105,4 +112,17 @@ a {
 
 .buttons {
     margin-top: 15px;
+}
+
+.red.button, .red.nutton:visited {
+    background-color: #e33100;
+}
+
+.red.button:hover {
+    background-color: #872300;
+}
+
+.large.button, .large.button:visited {
+    font-size: 14px;
+    padding: 8px 14px 9px;
 }
