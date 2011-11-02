@@ -18,6 +18,8 @@ public class GameManager
     public Game createGame()
     {
         Game game = new Game();
+        game.setInitialized(true);
+
         mGames.add(game);
 
         return game;

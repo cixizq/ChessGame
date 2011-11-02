@@ -48,9 +48,7 @@ public class NewGame extends HttpServlet
         }
 
         HttpSession session = request.getSession(true);
-
         Game game = manager.createGame();
-        game.setInitialized(true);
 
         session.setAttribute("nick", nick);
         session.setAttribute("color", color);
