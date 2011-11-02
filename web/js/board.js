@@ -49,6 +49,31 @@ board.resize = function()
     $('#board > div').height(min / 8);
 }
 
+board.move = function(obj, src, dst)
+{
+    dst.append(obj);
+
+    obj.css({
+        position: 'relative',
+        left: 0,
+        top: 0
+    });
+
+    // On vérifie si le coup est ok !
+    $.getJSON('check', { src: src.attr('id').substr(1), dst: dst.attr('id').substr(1) }, function(data) {
+        if (data.state == 'nok') {
+            board.undoLastMove();
+        }
+    });
+}
+
+/**
+ * Annule le dernier mouvement réalisé par l'utilisateur
+ */
+board.undoLastMove = function()
+{
+}
+
 /**
  * Ajoute une pièce du plateau de jeu
  */
@@ -58,10 +83,6 @@ board.addPiece = function(position, piece)
 
     if (_case == null) {
         return;
-    }
-
-    if (_case.children().size() != 0) {
-        //TODO Il y a déjà une pièce sur la case ...
     }
 
     var img = $(document.createElement('img'));
@@ -75,14 +96,6 @@ board.addPiece = function(position, piece)
     img.addClass('piece_' + piece.type);
 
     img.appendTo(_case);
-}
-
-/**
- * Regarde si le mouvement est correct
- */
-board.isValidMove = function(obj, src, dst)
-{
-    return true;
 }
 
 /**
@@ -133,48 +146,48 @@ board.giveup = function()
  */
 board.initialize = function()
 {
-    this.pieces = new Array();
+    var pieces = new Array();
 
     // Black
-    this.pieces['8A'] = new Piece('rook', 'black');
-    this.pieces['8B'] = new Piece('knight', 'black');
-    this.pieces['8C'] = new Piece('bishop', 'black');
-    this.pieces['8D'] = new Piece('queen', 'black');
-    this.pieces['8E'] = new Piece('king', 'black');
-    this.pieces['8F'] = new Piece('bishop', 'black');
-    this.pieces['8G'] = new Piece('knight', 'black');
-    this.pieces['8H'] = new Piece('rook', 'black');
+    pieces['8A'] = new Piece('rook', 'black');
+    pieces['8B'] = new Piece('knight', 'black');
+    pieces['8C'] = new Piece('bishop', 'black');
+    pieces['8D'] = new Piece('queen', 'black');
+    pieces['8E'] = new Piece('king', 'black');
+    pieces['8F'] = new Piece('bishop', 'black');
+    pieces['8G'] = new Piece('knight', 'black');
+    pieces['8H'] = new Piece('rook', 'black');
 
-    this.pieces['7A'] = new Piece('pawn', 'black');
-    this.pieces['7B'] = new Piece('pawn', 'black');
-    this.pieces['7C'] = new Piece('pawn', 'black');
-    this.pieces['7D'] = new Piece('pawn', 'black');
-    this.pieces['7E'] = new Piece('pawn', 'black');
-    this.pieces['7F'] = new Piece('pawn', 'black');
-    this.pieces['7G'] = new Piece('pawn', 'black');
-    this.pieces['7H'] = new Piece('pawn', 'black');
+    pieces['7A'] = new Piece('pawn', 'black');
+    pieces['7B'] = new Piece('pawn', 'black');
+    pieces['7C'] = new Piece('pawn', 'black');
+    pieces['7D'] = new Piece('pawn', 'black');
+    pieces['7E'] = new Piece('pawn', 'black');
+    pieces['7F'] = new Piece('pawn', 'black');
+    pieces['7G'] = new Piece('pawn', 'black');
+    pieces['7H'] = new Piece('pawn', 'black');
 
     // White
-    this.pieces['2A'] = new Piece('pawn', 'white');
-    this.pieces['2B'] = new Piece('pawn', 'white');
-    this.pieces['2C'] = new Piece('pawn', 'white');
-    this.pieces['2D'] = new Piece('pawn', 'white');
-    this.pieces['2E'] = new Piece('pawn', 'white');
-    this.pieces['2F'] = new Piece('pawn', 'white');
-    this.pieces['2G'] = new Piece('pawn', 'white');
-    this.pieces['2H'] = new Piece('pawn', 'white');
+    pieces['2A'] = new Piece('pawn', 'white');
+    pieces['2B'] = new Piece('pawn', 'white');
+    pieces['2C'] = new Piece('pawn', 'white');
+    pieces['2D'] = new Piece('pawn', 'white');
+    pieces['2E'] = new Piece('pawn', 'white');
+    pieces['2F'] = new Piece('pawn', 'white');
+    pieces['2G'] = new Piece('pawn', 'white');
+    pieces['2H'] = new Piece('pawn', 'white');
 
-    this.pieces['1A'] = new Piece('rook', 'white');
-    this.pieces['1B'] = new Piece('knight', 'white');
-    this.pieces['1C'] = new Piece('bishop', 'white');
-    this.pieces['1D'] = new Piece('queen', 'white');
-    this.pieces['1E'] = new Piece('king', 'white');
-    this.pieces['1F'] = new Piece('bishop', 'white');
-    this.pieces['1G'] = new Piece('knight', 'white');
-    this.pieces['1H'] = new Piece('rook', 'white');
+    pieces['1A'] = new Piece('rook', 'white');
+    pieces['1B'] = new Piece('knight', 'white');
+    pieces['1C'] = new Piece('bishop', 'white');
+    pieces['1D'] = new Piece('queen', 'white');
+    pieces['1E'] = new Piece('king', 'white');
+    pieces['1F'] = new Piece('bishop', 'white');
+    pieces['1G'] = new Piece('knight', 'white');
+    pieces['1H'] = new Piece('rook', 'white');
 
-    for (position in this.pieces) {
-        board.addPiece(position, this.pieces[position]);
+    for (position in pieces) {
+        board.addPiece(position, pieces[position]);
     }
 
     // La partie peut commencer !
@@ -189,18 +202,13 @@ board.initialize = function()
     });
 
     $("#board > div").droppable({
-        accept: function(el) {
-            // TODO: Il faut ici déterminer si le coup est bon
-            return true;
-        },
         drop: function(event, ui) {
-            $(this).append(ui.draggable);
+            var dst = $(this);
+            var src = $(ui.draggable).parent();
+            var obj = $(ui.draggable);
 
-            $(ui.draggable).css({
-                position: 'relative',
-                left: 0,
-                top: 0
-            });
+            // On bouge l'objet
+            board.move(obj, src, dst);
         },
         hoverClass: 'case-hover'
     });
