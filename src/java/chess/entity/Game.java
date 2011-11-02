@@ -13,6 +13,10 @@ public class Game
         mId = UUID.randomUUID();
     }
 
+    public void giveUp(String color)
+    {
+    }
+
     /**
      * Retourne l'identifiant de la partie
      */

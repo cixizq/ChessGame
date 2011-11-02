@@ -4,9 +4,17 @@
         <servlet-name>NewGame</servlet-name>
         <servlet-class>chess.NewGame</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GiveUp</servlet-name>
+        <servlet-class>chess.GiveUp</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewGame</servlet-name>
         <url-pattern>/newgame</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GiveUp</servlet-name>
+        <url-pattern>/giveup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

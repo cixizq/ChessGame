@@ -11,6 +11,7 @@
         <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8.16.min.js"></script>
         <script type="text/javascript" src="js/board.js"></script>
+        <script type="text/javascript" src="js/chess.js"></script>
         <script type="text/javascript">
             board.userColor = '<%= session.getAttribute("color") %>';
         </script>
@@ -27,7 +28,7 @@
         </div>
 
         <div id="informations">
-            <a href="#" class="button red large">Abandonner</a>
+            <a href="javascript:;" onclick="giveup()" class="button red large">Abandonner</a>
         </div>
 
         <div id="board">

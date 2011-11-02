@@ -18,7 +18,11 @@ Piece.prototype.getPathImage = function()
 
 var board = new Object();
 
+// La couleur de l'utilisateur
 board.userColor = undefined;
+
+// Si un jeu est en cours
+board.running = false;
 
 /**
  * Redimensionne le plateau de jeu en fonction de la taille
@@ -108,6 +112,23 @@ board.enableDragAndDrop = function()
 }
 
 /**
+ * Abandonner la partie en cours
+ */
+board.giveup = function()
+{
+    board.running = false;
+
+    // L'utilisateur n'est plus capable de bouger ses pièces
+    board.disableDragAndDrop();
+
+    // Une opacité de 50% pour faire cool !
+    $("#board > div > img").css({opacity: 0.5});
+
+    // On enlève la couleur du bouton abandonner
+    $('#informations > a.red').removeClass('red');
+}
+
+/**
  * Initialisation du plateau de jeu
  */
 board.initialize = function()
@@ -155,6 +176,9 @@ board.initialize = function()
     for (position in this.pieces) {
         board.addPiece(position, this.pieces[position]);
     }
+
+    // La partie peut commencer !
+    board.running = true;
 
     $('#board > div > img.piece_' + board.userColor).draggable({
         opacity: 0.8,
