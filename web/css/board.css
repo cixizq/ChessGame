@@ -8,6 +8,7 @@
     width: 55px;
     height: 55px;
     float: left;
+    text-align: center;
 }
 
 #board div.white {
