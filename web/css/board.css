@@ -12,11 +12,11 @@
 }
 
 #board div.white {
-    background-color: #eee;
+    background-color: #fff;
 }
 
 #board div.black {
-    background-color: #888;
+    background-color: #cfcfcf;
 }
 
 #board > div > img {
