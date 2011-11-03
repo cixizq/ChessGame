@@ -42,6 +42,19 @@ a {
     padding-bottom: 10px;
 }
 
+#message {
+}
+
+#joingame {
+    text-align: center;
+}
+
+#joingame input {
+    padding: 5px;
+    width: 300px;
+    margin: 5px 0;
+}
+
 /* Form */
 
 .form p {

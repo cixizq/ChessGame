@@ -9,8 +9,12 @@
         <servlet-class>chess.GiveUp</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CheckMove</servlet-name>
-        <servlet-class>chess.CheckMove</servlet-class>
+        <servlet-name>Move</servlet-name>
+        <servlet-class>chess.Move</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JoinGame</servlet-name>
+        <servlet-class>chess.JoinGame</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewGame</servlet-name>
@@ -21,8 +25,12 @@
         <url-pattern>/giveup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CheckMove</servlet-name>
-        <url-pattern>/check</url-pattern>
+        <servlet-name>Move</servlet-name>
+        <url-pattern>/move</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JoinGame</servlet-name>
+        <url-pattern>/joingame</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -29,6 +29,9 @@
 
         <div id="informations">
             <a href="javascript:;" onclick="giveup()" class="button red large">Abandonner</a>
+
+            <div id="message">
+            </div>
         </div>
 
         <div id="board">
@@ -96,6 +99,9 @@
             <div id="_1F" class="white"></div>
             <div id="_1G" class="black"></div>
             <div id="_1H" class="white"></div>
+        </div>
+        <div id="joingame">
+            <p>Invitez votre ami en lui donnant le lien suivant : </p><input type="text" value="<%= game.generateUrl(request) %>"/>
         </div>
     </body>
 </html>

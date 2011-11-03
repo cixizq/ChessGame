@@ -3,7 +3,6 @@ package chess;
 import chess.entity.Game;
 import chess.entity.GameManager;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +48,8 @@ public class NewGame extends HttpServlet
 
         HttpSession session = request.getSession(true);
         Game game = manager.createGame();
+
+        game.setFirstPlayerColor(color);
 
         session.setAttribute("nick", nick);
         session.setAttribute("color", color);

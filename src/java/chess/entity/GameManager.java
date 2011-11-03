@@ -1,18 +1,18 @@
 package chess.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * S'occupe de la gestion de l'ensemble des parties
  */
 public class GameManager
 {
-    protected Set<Game> mGames;
+    protected HashMap<String, Game> mGames;
 
     public GameManager()
     {
-        mGames = new HashSet<Game>();
+        mGames = new HashMap<String, Game>();
     }
 
     public Game createGame()
@@ -20,7 +20,7 @@ public class GameManager
         Game game = new Game();
         game.setInitialized(true);
 
-        mGames.add(game);
+        mGames.put(game.getId(), game);
 
         return game;
     }
@@ -28,8 +28,18 @@ public class GameManager
     /**
      * Retourne la liste des parties
      */
-    public Set<Game> getGames()
+    public Collection<Game> getGames()
     {
-        return mGames;
+        return mGames.values();
+    }
+
+    /**
+     * Retourne une partie en fonction de son identifiant
+     *
+     * @param id L'identifiant de la partie
+     */
+    public Game getGame(String id)
+    {
+        return mGames.get(id);
     }
 }

@@ -30,8 +30,8 @@ board.running = false;
  */
 board.resize = function()
 {
-    var width = 0.8 * $(document).width();
-    var height = 0.8 * $(document).height();
+    var width = 0.95 * $(document).width();
+    var height = 0.75 * $(document).height();
 
     var min = Math.min(width, height);
 
@@ -51,6 +51,10 @@ board.resize = function()
 
 board.move = function(obj, src, dst)
 {
+    // Il est nécessaire de supprimer l'ensemble des fils
+    // de la case
+    dst.children().remove();
+
     dst.append(obj);
 
     obj.css({
@@ -59,9 +63,16 @@ board.move = function(obj, src, dst)
         top: 0
     });
 
-    // On vérifie si le coup est ok !
-    $.getJSON('check', { src: src.attr('id').substr(1), dst: dst.attr('id').substr(1) }, function(data) {
-        if (data.state == 'nok') {
+    // On informe le serveur du changement sur le plateau
+    $.get('move', {src: src.attr('id').substr(1), dst: dst.attr('id').substr(1)}, function(xml) {
+        var xmlDoc = $(xml);
+        var state = xmlDoc.find("state");
+
+        if (state.text() == 'ok') {
+            // Le mouvement est bon
+            switchPlayer();
+        } else {
+            // Il ne l'est pas, il faut annuler le dernier mouvement
             board.undoLastMove();
         }
     });
