@@ -1,6 +1,7 @@
 package chess;
 
 import chess.entity.Game;
+import chess.entity.Player;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +20,10 @@ public class GiveUp extends HttpServlet
             return;
         }
 
-        String color = (String) session.getAttribute("color");
+        Player player = (Player) session.getAttribute("player");
         Game game = (Game) session.getAttribute("game");
 
-        game.giveUp(color);
+        game.giveUp(player);
     }
 
     @Override

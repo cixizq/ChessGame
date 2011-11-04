@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<jsp:useBean id="game" scope="session" class="chess.entity.Game" />
+<jsp:useBean id="player" scope="session" class="chess.entity.Player" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -13,11 +15,10 @@
         <script type="text/javascript" src="js/board.js"></script>
         <script type="text/javascript" src="js/chess.js"></script>
         <script type="text/javascript">
-            board.userColor = '<%= session.getAttribute("color") %>';
+            board.userColor = '<%= player.getColor() %>';
         </script>
     </head>
     <body>
-        <jsp:useBean id="game" scope="session" class="chess.entity.Game" />
         <%
             if (!game.isInitialized()) {
                 // L'utilisateur n'a pas créé une partie

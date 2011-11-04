@@ -2,10 +2,10 @@ package chess.entity;
 
 public class Piece
 {
-    protected Piece.Color mColor;
+    protected String mColor;
     protected Piece.Type mType;
 
-    public Piece(Piece.Color color, Piece.Type type)
+    public Piece(String color, Piece.Type type)
     {
         mColor = color;
         mType = type;
@@ -22,15 +22,9 @@ public class Piece
     /**
      * Retourne la couleur de la pièce
      */
-    public Piece.Color getColor()
+    public String getColor()
     {
         return mColor;
-    }
-
-    public enum Color
-    {
-        WHITE,
-        BLACK
     }
 
     public enum Type
@@ -39,6 +33,7 @@ public class Piece
         KNIGHT,
         BISHOP,
         QUEEN,
-        KING
+        KING,
+        PAWN
     }
 }

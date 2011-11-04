@@ -2,6 +2,7 @@ package chess;
 
 import chess.entity.Game;
 import chess.entity.GameManager;
+import chess.entity.Player;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -57,13 +58,18 @@ public class JoinGame extends HttpServlet
         }
 
         HttpSession session = request.getSession(true);
-        
+
+        Player player = new Player();
+        String color = (game.getFirstPlayer().getColor().equals("black")) ? "white" : "black";
+
+        player.setColor(color);
+
         session.setAttribute("game", game);
-        session.setAttribute("color", game.getOtherColor());
+        session.setAttribute("player", player);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("joingame.jsp");
         dispatcher.forward(request, response);
-    } 
+    }
 
     @Override
     public String getServletInfo()

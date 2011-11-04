@@ -2,6 +2,7 @@ package chess;
 
 import chess.entity.Game;
 import chess.entity.GameManager;
+import chess.entity.Player;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -49,10 +50,14 @@ public class NewGame extends HttpServlet
         HttpSession session = request.getSession(true);
         Game game = manager.createGame();
 
-        game.setFirstPlayerColor(color);
+        Player player = new Player();
 
-        session.setAttribute("nick", nick);
-        session.setAttribute("color", color);
+        player.setColor(color);
+        player.setNick(nick);
+
+        game.addPlayer(player);
+
+        session.setAttribute("player", player);
         session.setAttribute("game", game);
 
         response.sendRedirect("chess.jsp");
