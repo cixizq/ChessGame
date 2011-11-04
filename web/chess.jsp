@@ -100,7 +100,7 @@
             <div id="_1G" class="black"></div>
             <div id="_1H" class="white"></div>
         </div>
-        <div id="joingame">
+        <div id="game_link">
             <p>Invitez votre ami en lui donnant le lien suivant : </p><input type="text" value="<%= game.generateUrl(request) %>"/>
         </div>
     </body>

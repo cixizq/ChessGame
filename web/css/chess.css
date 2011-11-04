@@ -46,11 +46,11 @@ a {
 #message {
 }
 
-#joingame {
+#game_link {
     text-align: center;
 }
 
-#joingame input {
+#game_link input {
     padding: 5px;
     width: 300px;
     margin: 5px 0;

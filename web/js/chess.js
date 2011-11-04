@@ -10,7 +10,7 @@ $(document).ready(function() {
         $(this).parents().filter("form").trigger("submit");
     });
 
-    $("#joingame > input").focus(function(){
+    $("#game_link > input").focus(function(){
         this.select();
     });
 });
