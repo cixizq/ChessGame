@@ -31,7 +31,16 @@ a {
     margin-bottom: 20px;
     background: #222 url(../images/alert-overlay.png) repeat-x;
     background-color: #644d52;
+    text-align: center;
 }
+
+#header span {
+    color: #fff;
+    font-weight: bold;
+    padding-top: 2px;
+    display: block;
+}
+
 
 #wrap {
     width: 800px;

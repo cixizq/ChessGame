@@ -20,4 +20,21 @@ public class Case
     {
         return mY;
     }
+
+    /**
+     * Transforme une case sous la forme "D1" en une case
+     */
+    public static Case transform(String format)
+    {
+        if (format.length() != 2) {
+            return null;
+        }
+
+        format = format.toLowerCase();
+
+        char x = format.charAt(0);
+        char y = format.charAt(1);
+
+        return new Case(x - 'a', Integer.parseInt(String.valueOf(y)));
+    }
 }

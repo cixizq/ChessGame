@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<jsp:useBean id="player" scope="session" class="chess.entity.Player" />
+<jsp:useBean id="game" scope="session" class="chess.entity.Game" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -12,11 +14,10 @@
         <script type="text/javascript" src="js/chess.js"></script>
     </head>
     <body>
-        <jsp:useBean id="player" scope="session" class="chess.entity.Player" />
         <div id="header">
         </div>
         <div id="wrap">
-            <h1>Rejoindre une partie</h1>
+            <h1>Rejoindre la partie de <%= game.getFirstPlayer().getNick() %></h1>
 
             <form id="joingame" action="joingame" method="post" class="form">
                 <p>

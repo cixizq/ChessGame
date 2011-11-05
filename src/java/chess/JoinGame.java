@@ -4,6 +4,7 @@ import chess.entity.Game;
 import chess.entity.GameManager;
 import chess.entity.Player;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,15 +18,29 @@ public class JoinGame extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        PrintWriter out = response.getWriter();
+
         String nick = request.getParameter("nick");
 
         if (nick == null || nick.isEmpty()) {
-            response.sendRedirect("index.html");
+            out.println("Le paramètre 'nick' est manquant.");
             return;
         }
 
-        HttpSession session = request.getSession(true);
-        session.setAttribute("nick", nick);
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            out.println("La session est à null ... il est nécessaire de recommencer l'étape précédente.");
+            return;
+        }
+
+        // On ajoute le pseudo au joueur déjà créé
+        Player player = (Player) session.getAttribute("player");
+        player.setNick(nick);
+
+        // Maintenant la partie commence !
+        Game game = (Game) session.getAttribute("game");
+        game.addPlayer(player);
+        game.start();
 
         response.sendRedirect("chess.jsp");
     }
@@ -33,6 +48,8 @@ public class JoinGame extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        PrintWriter out = response.getWriter();
+
         String idGame = request.getParameter("gid");
 
         if (idGame == null || idGame.isEmpty()) {
@@ -45,7 +62,7 @@ public class JoinGame extends HttpServlet
 
         if (manager == null) {
             // Premier passage donc impossible qu'il y ai déjà un jeu ...
-            response.sendRedirect("index.html");
+            out.println("Il n'y a aucun jeu en ce moment.");
             return;
         }
 
@@ -53,7 +70,7 @@ public class JoinGame extends HttpServlet
 
         if (game == null || game.isFull()) {
             // Le jeu n'existe pas ou il y a déjà 2 joueurs
-            response.sendRedirect("index.html");
+            out.println("Aucun jeu avec cet id ou alors le jeu est déjà plein.");
             return;
         }
 

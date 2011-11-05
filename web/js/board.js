@@ -24,6 +24,9 @@ board.userColor = undefined;
 // Si un jeu est en cours
 board.running = false;
 
+// Si le joueur peut jouer
+board.canPlay = undefined;
+
 /**
  * Redimensionne le plateau de jeu en fonction de la taille
  * de la fenêtre
@@ -223,6 +226,15 @@ board.initialize = function()
         },
         hoverClass: 'case-hover'
     });
+
+    board.canPlay = true;
+
+    if (board.userColor == 'black') {
+        // C'est toujours le joueur blanc qui commence
+        switchPlayer();
+    } else {
+        chess.setMessage('your_turn');
+    }
 }
 
 $(document).ready(function() {

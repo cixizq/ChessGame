@@ -26,6 +26,7 @@
             }
         %>
         <div id="header">
+            <span></span>
         </div>
 
         <div id="informations">
@@ -101,8 +102,10 @@
             <div id="_1G" class="black"></div>
             <div id="_1H" class="white"></div>
         </div>
+        <% if (!game.isFull()) { %>
         <div id="game_link">
             <p>Invitez votre ami en lui donnant le lien suivant : </p><input type="text" value="<%= game.generateUrl(request) %>"/>
         </div>
+        <% } %>
     </body>
 </html>

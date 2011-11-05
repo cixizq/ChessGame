@@ -11,6 +11,8 @@ public class Game
     protected boolean mInitialized;
     protected Piece[][] mPieces;
     protected List<Player> mPlayers;
+    protected Movement mLastMovement;
+    protected boolean mRunning;
     protected Player mCurrentPlayer;
 
     public Game()
@@ -18,6 +20,8 @@ public class Game
         mId = UUID.randomUUID();
         mPieces = new Piece[8][8];
         mPlayers = new ArrayList<Player>();
+        mRunning = false;
+        mCurrentPlayer = null;
 
         initialize();
     }
@@ -78,29 +82,39 @@ public class Game
      */
     public boolean move(Case src, Case dst)
     {
+        if (!mRunning || !isFull()) {
+            return false;
+        }
+
         if (!isCorrect(src) || !isCorrect(dst)) {
             return false;
         }
 
-        String currentColor = mCurrentPlayer.getColor();
-
         Piece pieceSrc = getPiece(src);
-        Piece pieceDst = getPiece(dst);
-
-        // La pièce source n'existe pas
-        if (pieceSrc == null || !pieceSrc.getColor().equals(currentColor)) {
-            return false;
-        }
-
-        // Il essaye de prendre un pion à lui ...
-        if (pieceDst != null && pieceDst.getColor().equals(currentColor)) {
-            return false;
-        }
 
         setPiece(dst, pieceSrc);
         setPiece(src, null);
 
+        // On sauvegarde le dernier mouvement
+        mLastMovement = new Movement();
+        mLastMovement.src = src;
+        mLastMovement.dst = dst;
+
         return true;
+    }
+
+    /**
+     * Démarrer le jeu
+     */
+    public void start()
+    {
+        // Si le jeu n'a pas deux joueurs, impossible de le lancer
+        if (!isFull()) {
+            return;
+        }
+
+        mCurrentPlayer = (getFirstPlayer().getColor().equals("white")) ? getFirstPlayer() : getSecondPlayer();
+        mRunning = true;
     }
 
     /**
@@ -130,6 +144,18 @@ public class Game
         }
 
         return mPlayers.get(0);
+    }
+
+    /**
+     * Retourne le second joueur de la partie
+     */
+    public Player getSecondPlayer()
+    {
+        if (!isFull()) {
+            return null;
+        }
+
+        return mPlayers.get(1);
     }
 
     /**
@@ -177,11 +203,6 @@ public class Game
         mPlayers.add(player);
 
         return true;
-    }
-
-    public Player getCurrentPlayer()
-    {
-        return mCurrentPlayer;
     }
 
     public boolean isInitialized()

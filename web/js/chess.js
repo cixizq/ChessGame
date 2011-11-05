@@ -2,8 +2,16 @@ var chess = new Object();
 
 chess.messages = new Array();
 
-chess.messages['your_turn'] = "C'est a vous de jouer !";
-chess.messages['please_wait'] = "C'est à l'autre joueur de jouer";
+chess.messages['your_turn'] = "C'est a vous de jouer";
+chess.messages['please_wait'] = "En attente du mouvement de l'autre joueur ...";
+
+/**
+ * Change le message présent dans le header
+ */
+chess.setMessage = function(key)
+{
+    $('#header > span').html(this.messages[key]);
+}
 
 $(document).ready(function() {
     $(".form .button").click(function() {
@@ -28,9 +36,20 @@ function giveup()
     }
 }
 
+/**
+ * Change le joueur courant
+ */
 function switchPlayer()
 {
-    board.disableDragAndDrop();
+    if (board.canPlay) {
+        board.disableDragAndDrop();
+        chess.setMessage('please_wait');
 
-    // Affiche un message au joueur pour l'avertir du changement de joueur
+        board.canPlay = false;
+    } else {
+        board.enableDragAndDrop();
+        chess.setMessage('your_turn');
+
+        board.canPlay = true;
+    }
 }
