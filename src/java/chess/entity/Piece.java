@@ -3,9 +3,9 @@ package chess.entity;
 public class Piece
 {
     protected String mColor;
-    protected Piece.Type mType;
+    protected String mType;
 
-    public Piece(String color, Piece.Type type)
+    public Piece(String type, String color)
     {
         mColor = color;
         mType = type;
@@ -14,7 +14,7 @@ public class Piece
     /**
      * Retourne le type de la pièce
      */
-    public Piece.Type getType()
+    public String getType()
     {
         return mType;
     }
@@ -25,15 +25,5 @@ public class Piece
     public String getColor()
     {
         return mColor;
-    }
-
-    public enum Type
-    {
-        ROOK,
-        KNIGHT,
-        BISHOP,
-        QUEEN,
-        KING,
-        PAWN
     }
 }

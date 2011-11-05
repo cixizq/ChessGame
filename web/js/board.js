@@ -52,7 +52,7 @@ board.resize = function()
     $('#board > div').height(min / 8);
 }
 
-board.move = function(obj, src, dst)
+board.move = function(src, dst, obj)
 {
     // Il est nécessaire de supprimer l'ensemble des fils
     // de la case
@@ -69,23 +69,44 @@ board.move = function(obj, src, dst)
     // On informe le serveur du changement sur le plateau
     $.get('move', {src: src.attr('id').substr(1), dst: dst.attr('id').substr(1)}, function(xml) {
         var xmlDoc = $(xml);
-        var state = xmlDoc.find("state");
+        var state = xmlDoc.find('state');
 
         if (state.text() == 'ok') {
             // Le mouvement est bon
             switchPlayer();
         } else {
             // Il ne l'est pas, il faut annuler le dernier mouvement
-            board.undoLastMove();
+            var xmlPiece = xmlDoc.find('piece');
+            var piece = null;
+
+            if (xmlPiece.length != 0) {
+                piece = new Piece();
+                piece.color = xmlPiece.find('color').text();
+                piece.type = xmlPiece.find('type').text();
+            }
+
+            board.undoLastMove(src, dst, piece);
         }
     });
 }
 
 /**
  * Annule le dernier mouvement réalisé par l'utilisateur
+ *
+ * obj représente la pièce potentiel présente sur la case dst avant
+ * le mouvement
  */
-board.undoLastMove = function()
+board.undoLastMove = function(src, dst, obj)
 {
+    var img = dst.children();
+
+    // Normalement il n'y a persone sur 'src' mais autant être sûr !
+    src.children().remove();
+    src.append(img);
+
+    if (obj != null) {
+        board.addPiece(dst.attr('id').substr(1), obj)
+    }
 }
 
 /**
@@ -222,7 +243,7 @@ board.initialize = function()
             var obj = $(ui.draggable);
 
             // On bouge l'objet
-            board.move(obj, src, dst);
+            board.move(src, dst, obj);
         },
         hoverClass: 'case-hover'
     });

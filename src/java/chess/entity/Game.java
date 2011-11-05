@@ -31,41 +31,41 @@ public class Game
      */
     private void initialize()
     {
-        mPieces[0][0] = new Piece("black", Piece.Type.ROOK);
-        mPieces[0][1] = new Piece("black", Piece.Type.KNIGHT);
-        mPieces[0][2] = new Piece("black", Piece.Type.BISHOP);
-        mPieces[0][3] = new Piece("black", Piece.Type.QUEEN);
-        mPieces[0][4] = new Piece("black", Piece.Type.KING);
-        mPieces[0][5] = new Piece("black", Piece.Type.BISHOP);
-        mPieces[0][6] = new Piece("black", Piece.Type.KNIGHT);
-        mPieces[0][7] = new Piece("black", Piece.Type.ROOK);
+        mPieces[0][0] = new Piece("rook", "black");
+        mPieces[0][1] = new Piece("knight", "black");
+        mPieces[0][2] = new Piece("bishop", "black");
+        mPieces[0][3] = new Piece("queen", "black");
+        mPieces[0][4] = new Piece("king", "black");
+        mPieces[0][5] = new Piece("bishop", "black");
+        mPieces[0][6] = new Piece("knight", "black");
+        mPieces[0][7] = new Piece("rook", "black");
 
-        mPieces[1][0] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][1] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][2] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][3] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][4] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][5] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][6] = new Piece("black", Piece.Type.PAWN);
-        mPieces[1][7] = new Piece("black", Piece.Type.PAWN);
+        mPieces[1][0] = new Piece("pawn", "black");
+        mPieces[1][1] = new Piece("pawn", "black");
+        mPieces[1][2] = new Piece("pawn", "black");
+        mPieces[1][3] = new Piece("pawn", "black");
+        mPieces[1][4] = new Piece("pawn", "black");
+        mPieces[1][5] = new Piece("pawn", "black");
+        mPieces[1][6] = new Piece("pawn", "black");
+        mPieces[1][7] = new Piece("pawn", "black");
 
-        mPieces[6][0] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][1] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][2] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][3] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][4] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][5] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][6] = new Piece("white", Piece.Type.PAWN);
-        mPieces[6][7] = new Piece("white", Piece.Type.PAWN);
+        mPieces[6][0] = new Piece("pawn", "white");
+        mPieces[6][1] = new Piece("pawn", "white");
+        mPieces[6][2] = new Piece("pawn", "white");
+        mPieces[6][3] = new Piece("pawn", "white");
+        mPieces[6][4] = new Piece("pawn", "white");
+        mPieces[6][5] = new Piece("pawn", "white");
+        mPieces[6][6] = new Piece("pawn", "white");
+        mPieces[6][7] = new Piece("pawn", "white");
 
-        mPieces[7][0] = new Piece("white", Piece.Type.ROOK);
-        mPieces[7][1] = new Piece("white", Piece.Type.KNIGHT);
-        mPieces[7][2] = new Piece("white", Piece.Type.BISHOP);
-        mPieces[7][3] = new Piece("white", Piece.Type.QUEEN);
-        mPieces[7][4] = new Piece("white", Piece.Type.KING);
-        mPieces[7][5] = new Piece("white", Piece.Type.BISHOP);
-        mPieces[7][6] = new Piece("white", Piece.Type.KNIGHT);
-        mPieces[7][7] = new Piece("white", Piece.Type.ROOK);
+        mPieces[7][0] = new Piece("rook", "white");
+        mPieces[7][1] = new Piece("knight", "white");
+        mPieces[7][2] = new Piece("bishop", "white");
+        mPieces[7][3] = new Piece("queen", "white");
+        mPieces[7][4] = new Piece("king", "white");
+        mPieces[7][5] = new Piece("bishop", "white");
+        mPieces[7][6] = new Piece("knight", "white");
+        mPieces[7][7] = new Piece("rook", "white");
     }
 
     public void giveUp(Player player)
@@ -82,23 +82,28 @@ public class Game
      */
     public boolean move(Case src, Case dst)
     {
-        if (!mRunning || !isFull()) {
+        if (!mRunning) {
+            // Le jeu n'est pas lancé
             return false;
         }
 
         if (!isCorrect(src) || !isCorrect(dst)) {
+            // Une des cases n'est pas sur le plateau
             return false;
         }
 
         Piece pieceSrc = getPiece(src);
 
+        if (pieceSrc == null) {
+            // Il essaye de jouer une pièce qui n'existe pas ?
+            return false;
+        }
+
         setPiece(dst, pieceSrc);
         setPiece(src, null);
 
         // On sauvegarde le dernier mouvement
-        mLastMovement = new Movement();
-        mLastMovement.src = src;
-        mLastMovement.dst = dst;
+        mLastMovement = new Movement(src, dst);
 
         return true;
     }

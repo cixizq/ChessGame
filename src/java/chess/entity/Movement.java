@@ -2,7 +2,36 @@ package chess.entity;
 
 public class Movement
 {
-    public Case src;
+    protected Case mSource;
+    protected Case mDestination;
 
-    public Case dst;
+    public Movement(Case src, Case dst)
+    {
+        mSource = src;
+        mDestination = dst;
+    }
+
+    public Movement()
+    {
+    }
+
+    public Case getSource()
+    {
+        return mSource;
+    }
+
+    public void setSource(Case src)
+    {
+        mSource = src;
+    }
+
+    public Case getDestination()
+    {
+        return mDestination;
+    }
+
+    public void setDestination(Case dst)
+    {
+        mDestination = dst;
+    }
 }

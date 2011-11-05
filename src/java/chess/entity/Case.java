@@ -35,6 +35,11 @@ public class Case
         char x = format.charAt(0);
         char y = format.charAt(1);
 
-        return new Case(Integer.parseInt(String.valueOf(x)), y - 'a');
+        /**
+         * x => 8
+         * y => a
+         */
+
+        return new Case(8 - Integer.parseInt(String.valueOf(x)), y - 'a');
     }
 }
