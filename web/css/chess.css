@@ -65,6 +65,11 @@ a {
     margin: 5px 0;
 }
 
+#list_games {
+    float: right;
+    margin: 5px 15px 0 0;
+}
+
 /* Form */
 
 .form p {
@@ -143,6 +148,14 @@ a {
 
 .red.button:hover {
     background-color: #872300;
+}
+
+.magenta.button, .magenta.button:visited {
+    background-color: #a9014b;
+}
+
+.magenta.button:hover {
+    background-color: #630030;
 }
 
 .large.button, .large.button:visited {
