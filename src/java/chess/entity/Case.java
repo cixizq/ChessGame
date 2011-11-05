@@ -21,6 +21,14 @@ public class Case
         return mY;
     }
 
+    public String reverseTransform()
+    {
+        int x = 8 - mX;
+        char y = (char)(mY + 'A');
+
+        return "" + x + y;
+    }
+
     /**
      * Transforme une case sous la forme "D1" en une case
      */
@@ -30,16 +38,14 @@ public class Case
             return null;
         }
 
-        format = format.toLowerCase();
-
         char x = format.charAt(0);
         char y = format.charAt(1);
 
         /**
          * x => 8
-         * y => a
+         * y => A
          */
 
-        return new Case(8 - Integer.parseInt(String.valueOf(x)), y - 'a');
+        return new Case(8 - Integer.parseInt(String.valueOf(x)), y - 'A');
     }
 }

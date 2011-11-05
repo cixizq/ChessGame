@@ -39,6 +39,7 @@ public class JoinGame extends HttpServlet
 
         // Maintenant la partie commence !
         Game game = (Game) session.getAttribute("game");
+
         game.addPlayer(player);
         game.start();
 

@@ -4,11 +4,13 @@ public class Movement
 {
     protected Case mSource;
     protected Case mDestination;
+    protected String mColor;
 
-    public Movement(Case src, Case dst)
+    public Movement(Case src, Case dst, String color)
     {
         mSource = src;
         mDestination = dst;
+        mColor = color;
     }
 
     public Movement()
@@ -33,5 +35,15 @@ public class Movement
     public void setDestination(Case dst)
     {
         mDestination = dst;
+    }
+
+    public String getColor()
+    {
+        return mColor;
+    }
+
+    public void setColor(String color)
+    {
+        mColor = color;
     }
 }

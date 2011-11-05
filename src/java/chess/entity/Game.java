@@ -95,9 +95,15 @@ public class Game
         }
 
         Piece pieceSrc = getPiece(src);
+        Piece pieceDst = getPiece(dst);
 
         if (pieceSrc == null) {
             // Il essaye de jouer une pièce qui n'existe pas ?
+            return false;
+        }
+
+        // Il essaye de placer une pièce sur une case qui est déjà à lui
+        if (pieceDst != null && pieceSrc.getColor().equals(pieceDst.getColor())) {
             return false;
         }
 
@@ -105,7 +111,7 @@ public class Game
         setPiece(src, null);
 
         // On sauvegarde le dernier mouvement
-        mLastMovement = new Movement(src, dst);
+        mLastMovement = new Movement(src, dst, mCurrentPlayer.getColor());
 
         return true;
     }
@@ -156,6 +162,11 @@ public class Game
         mEnded = ended;
     }
 
+    public void switchPlayer()
+    {
+        mCurrentPlayer = (mCurrentPlayer == getFirstPlayer()) ? getSecondPlayer() : getFirstPlayer();
+    }
+
     /**
      * Retourne le premier joueur de la partie
      */
@@ -178,6 +189,11 @@ public class Game
         }
 
         return mPlayers.get(1);
+    }
+
+    public Player getCurrentPlayer()
+    {
+        return mCurrentPlayer;
     }
 
     /**
@@ -225,6 +241,16 @@ public class Game
         mPlayers.add(player);
 
         return true;
+    }
+
+    public void removeLastMovement()
+    {
+        mLastMovement = null;
+    }
+
+    public Movement getLastMovement()
+    {
+        return mLastMovement;
     }
 
     public boolean isInitialized()

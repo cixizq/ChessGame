@@ -1,6 +1,7 @@
 package chess;
 
 import chess.entity.Game;
+import chess.entity.Movement;
 import chess.entity.Player;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ public class Update extends HttpServlet
         HttpSession session = request.getSession(false);
         if (session == null) {
             // Il n'y a pas de session .. bizarre ?
+            response.getWriter().print("pas de session");
             return;
         }
 
@@ -29,7 +31,13 @@ public class Update extends HttpServlet
         if (game.isEnded()) {
             state = 3;
         } else {
-
+            Movement mvt = game.getLastMovement();
+            if (mvt != null && !mvt.getColor().equals(player.getColor())) {
+                // Il y a un mouvement de l'autre joueur !
+                state = 2;
+                request.setAttribute("movement", mvt);
+                game.removeLastMovement();
+            }
         }
 
         request.setAttribute("state", state);

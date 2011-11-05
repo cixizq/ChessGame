@@ -26,5 +26,11 @@
 #board div.case-hover {
     background-position: center center;
     background-image: url(../images/hover.png);
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
+}
+
+#board div.last-movement {
+    background-position: center center;
+    background-image: url(../images/last_movement.png);
+    background-repeat: no-repeat;
 }

@@ -74,6 +74,13 @@ chess.update = function()
         var state = parseInt(xmlDoc.find('state').text());
 
         switch (state) {
+            case 2:
+                var src = xmlDoc.find('src').text();
+                var dst = xmlDoc.find('dst').text();
+                var color = xmlDoc.find('colr').text();
+
+                chess.receiveMovement(src, dst, color);
+                break;
             case 3:
                 chess.receiveGiveup();
                 break;
@@ -105,6 +112,20 @@ chess.receiveGiveup = function()
 {
     chess.stopGame();
     chess.setMessage('receive_giveup');
+}
+
+chess.receiveMovement = function(idSrc, idDst, color)
+{
+    $('#board > div').removeClass('last-movement');
+
+    var src = $('#_' + idSrc);
+    var dst = $('#_' + idDst);
+
+    src.addClass('last-movement');
+    dst.addClass('last-movement');
+
+    board.movePiece(src, dst);
+    chess.switchPlayer();
 }
 
 /**
