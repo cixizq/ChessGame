@@ -67,17 +67,22 @@ board.movePiece = function(src, dst)
  */
 board.move = function(src, dst, obj)
 {
-    // Il est nécessaire de supprimer l'ensemble des fils
-    // de la case
-    dst.children().remove();
-
-    dst.append(obj);
-
     obj.css({
         position: 'relative',
         left: 0,
         top: 0
     });
+
+    if (dst.children().length == 1 && dst.children().hasClass('piece_' + board.userColor)) {
+        // L'utilisateur essaye de placer une pièce
+        // sa pièce sur une case à lui !
+        return;
+    }
+
+    // Il est nécessaire de supprimer l'ensemble des fils de la case
+    dst.children().remove();
+
+    dst.append(obj);
 
     // On informe le serveur du changement sur le plateau
     $.get('move', {src: src.attr('id').substr(1), dst: dst.attr('id').substr(1)}, function(xml) {
