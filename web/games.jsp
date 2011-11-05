@@ -19,6 +19,7 @@
         <div id="header">
         </div>
         <div id="wrap">
+            <a id="button_header" class="button magenta" href="index.html">Retour</a>
             <h1>Liste des parties</h1>
             <ul>
                 <%
@@ -27,7 +28,20 @@
                     while (it.hasNext()) {
                         Game game = it.next();
                 %>
-                <li>Partie de <%= game.getFirstPlayer().getNick() %></li>
+                <li>
+                    Partie de <%= game.getFirstPlayer().getNick() %>
+                    <%
+                        if (game.isFull()) {
+                            %>
+                            contre <%= game.getSecondPlayer().getNick() %>
+                            <%
+                        } else {
+                            %>
+                            - <a href="<%= game.generateUrl(request) %>">Rejoindre</a>
+                            <%
+                        }
+                    %>
+                </li>
                 <%
                     }
                 %>
