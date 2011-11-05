@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.Iterator"%>
+<%@page import="chess.entity.Game"%>
+<%@page import="java.util.Collection"%>
 <jsp:useBean id="manager" scope="application" class="chess.entity.GameManager" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,6 +20,18 @@
         </div>
         <div id="wrap">
             <h1>Liste des parties</h1>
+            <ul>
+                <%
+                    Collection<Game> games = manager.getGames();
+                    Iterator<Game> it = games.iterator();
+                    while (it.hasNext()) {
+                        Game game = it.next();
+                %>
+                <li>Partie de <%= game.getFirstPlayer().getNick() %></li>
+                <%
+                    }
+                %>
+            </ul>
         </div>
     </body>
 </html>

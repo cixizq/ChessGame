@@ -52,6 +52,20 @@ board.resize = function()
     $('#board > div').height(min / 8);
 }
 
+/**
+ * Bouge la pièce présente sur la case source sur la
+ * case destination
+ */
+board.movePiece = function(src, dst)
+{
+    var img = src.children();
+
+    if (img != null) {
+        dst.children().remove();
+        dst.append(img);
+    }
+}
+
 board.move = function(src, dst, obj)
 {
     // Il est nécessaire de supprimer l'ensemble des fils
@@ -98,11 +112,8 @@ board.move = function(src, dst, obj)
  */
 board.undoLastMove = function(src, dst, obj)
 {
-    var img = dst.children();
-
-    // Normalement il n'y a persone sur 'src' mais autant être sûr !
-    src.children().remove();
-    src.append(img);
+    // On retourne sur la case de départ
+    board.movePiece(dst, src);
 
     if (obj != null) {
         board.addPiece(dst.attr('id').substr(1), obj)
