@@ -35,6 +35,6 @@ public class Case
         char x = format.charAt(0);
         char y = format.charAt(1);
 
-        return new Case(x - 'a', Integer.parseInt(String.valueOf(y)));
+        return new Case(Integer.parseInt(String.valueOf(x)), y - 'a');
     }
 }
