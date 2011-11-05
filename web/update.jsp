@@ -7,7 +7,7 @@
 <update>
     <state><%= state %></state>
     <%
-        if (state == 2) {
+        if (state == 1) {
             Movement mvt = (Movement) request.getAttribute("movement");
             %>
     <movement>

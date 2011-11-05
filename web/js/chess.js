@@ -132,9 +132,20 @@ chess.receiveMovement = function(idSrc, idDst)
  */
 chess.initialize = function()
 {
-    chess.running = true;
-
     board.initialize();
+
+    chess.running = true;
+    board.canPlay = true;
+    chess.setMessage('your_turn');
+
+    // C'est toujours le blanc qui commence
+    if (board.userColor == 'black') {
+        board.disableDragAndDrop();
+        chess.setMessage('please_wait');
+
+        board.canPlay = false;
+    }
+
     chess.update();
 }
 

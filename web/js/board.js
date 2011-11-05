@@ -1,5 +1,3 @@
-// Objet pièce
-
 function Piece(type, color)
 {
     this.color = color;
@@ -63,6 +61,10 @@ board.movePiece = function(src, dst)
     }
 }
 
+/**
+ * Callback utilisé par le drag & drop de jQuery.
+ * Ne pas appeler directement !
+ */
 board.move = function(src, dst, obj)
 {
     // Il est nécessaire de supprimer l'ensemble des fils
@@ -247,15 +249,6 @@ board.initialize = function()
         },
         hoverClass: 'case-hover'
     });
-
-    board.canPlay = true;
-
-    if (board.userColor == 'black') {
-        // C'est toujours le joueur blanc qui commence
-        chess.switchPlayer();
-    } else {
-        chess.setMessage('your_turn');
-    }
 }
 
 $(document).ready(function() {
