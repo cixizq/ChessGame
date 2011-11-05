@@ -79,12 +79,13 @@ public class Game
      *
      * @param src La case de départ
      * @param dst La case d'arrivé
+     * @param player Le joueur qui souhaite effectuer le mouvement
      *
      * @return Vrai si le mouvement a été réalisé
      */
-    public boolean move(Case src, Case dst)
+    public boolean move(Case src, Case dst, Player player)
     {
-        if (!mRunning) {
+        if (!mRunning || mCurrentPlayer != player) {
             // Le jeu n'est pas lancé
             return false;
         }

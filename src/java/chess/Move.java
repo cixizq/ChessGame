@@ -26,11 +26,6 @@ public class Move extends HttpServlet
         Game game = (Game) session.getAttribute("game");
         Player player = (Player) session.getAttribute("player");
 
-        // Il est nécessaire de vérifier que c'est le bon joueur qui essaye de jouer
-        if (player != game.getCurrentPlayer()) {
-            return;
-        }
-
         String src = request.getParameter("src");
         String dst = request.getParameter("dst");
 
@@ -46,7 +41,7 @@ public class Move extends HttpServlet
         }
 
         // On effectue le mouvement
-        boolean result = game.move(caseSrc, caseDst);
+        boolean result = game.move(caseSrc, caseDst, player);
         request.setAttribute("result", result);
 
         if (!result) {
