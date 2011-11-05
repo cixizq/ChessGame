@@ -29,12 +29,12 @@ public class Update extends HttpServlet
         Player player = (Player) session.getAttribute("player");
 
         if (game.isEnded()) {
-            state = 3;
+            state = 2;
         } else {
             Movement mvt = game.getLastMovement();
             if (mvt != null && !mvt.getColor().equals(player.getColor())) {
                 // Il y a un mouvement de l'autre joueur !
-                state = 2;
+                state = 1;
                 request.setAttribute("movement", mvt);
                 game.removeLastMovement();
             }

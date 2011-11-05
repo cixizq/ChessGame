@@ -13,7 +13,6 @@
     <movement>
         <src><%= mvt.getSource().reverseTransform() %></src>
         <dst><%= mvt.getDestination().reverseTransform() %></dst>
-        <color><%= mvt.getColor() %></color>
     </movement>
             <%
         }
