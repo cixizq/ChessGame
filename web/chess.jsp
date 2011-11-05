@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="game" scope="session" class="chess.entity.Game" />
 <jsp:useBean id="player" scope="session" class="chess.entity.Player" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -21,7 +22,7 @@
     <body>
         <%
             if (!game.isInitialized()) {
-                // L'utilisateur n'a pas créé une partie
+                // L'utilisateur n'a pas crÃ©Ã© une partie
                 response.sendRedirect("index.html");
             }
         %>

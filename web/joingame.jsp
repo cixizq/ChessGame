@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="player" scope="session" class="chess.entity.Player" />
 <jsp:useBean id="game" scope="session" class="chess.entity.Game" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -21,11 +22,11 @@
 
             <form id="joingame" action="joingame" method="post" class="form">
                 <p>
-                    <label for="nick">Prénom</label>
+                    <label for="nick">PrÃ©nom</label>
                     <input type="text" name="nick" id="nick" value="" />
                 </p>
                 <p>
-                    <label for="color">Couleur</label>
+                    <label>Couleur</label>
                     <input type="radio" name="color" value="white" disabled="disabled" <%= player.getColor().equals("white") ? "checked='checked'" : "" %>/> <span>Blanc</span>
                     <input type="radio" name="color" value="black" disabled="disabled" <%= player.getColor().equals("black") ? "checked='checked'" : "" %>/> <span>Noir</span>
                 </p>
