@@ -3,7 +3,8 @@ var chess = new Object();
 chess.messages = new Array();
 
 chess.messages['your_turn'] = "C'est a vous de jouer";
-chess.messages['receive_giveup'] = "Le joueur vient d'abandonner ! Vous avez gagné !";
+chess.messages['lost'] = "Vous avez perdu !";
+chess.messages['receive_giveup'] = "Le joueur vient d'abandonner ! Vous avez gagne !";
 chess.messages['please_wait'] = "En attente du mouvement de l'autre joueur ...";
 
 chess.running = false;
@@ -31,10 +32,10 @@ $(document).ready(function() {
  */
 chess.giveup = function()
 {
-    if (board.running && confirm('Voulez-vous vraiment abandonner ?')) {
+    if (chess.running && confirm('Voulez-vous vraiment abandonner ?')) {
         $.get('giveup', function() {
             chess.stopGame();
-            alert('Vous avez perdu !');
+            chess.setMessage('lost')
         });
     }
 }
