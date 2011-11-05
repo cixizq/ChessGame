@@ -123,6 +123,9 @@ chess.receiveMovement = function(idSrc, idDst)
     src.addClass('last-movement');
     dst.addClass('last-movement');
 
+    // On est sûr maintenant qu'il y a un 2è joueur
+    $('#game_link').slideUp();
+
     board.movePiece(src, dst);
     chess.switchPlayer();
 }
