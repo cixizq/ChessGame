@@ -21,9 +21,6 @@ var board = new Object();
 // La couleur de l'utilisateur
 board.userColor = undefined;
 
-// Si un jeu est en cours
-board.running = false;
-
 // Si le joueur peut jouer
 board.canPlay = undefined;
 
@@ -87,7 +84,7 @@ board.move = function(src, dst, obj)
 
         if (state.text() == 'ok') {
             // Le mouvement est bon
-            switchPlayer();
+            chess.switchPlayer();
         } else {
             // Il ne l'est pas, il faut annuler le dernier mouvement
             var xmlPiece = xmlDoc.find('piece');
@@ -171,20 +168,15 @@ board.enableDragAndDrop = function()
 }
 
 /**
- * Abandonner la partie en cours
+ * Stop la partie en cours
  */
-board.giveup = function()
+board.disable = function()
 {
-    board.running = false;
-
     // L'utilisateur n'est plus capable de bouger ses pièces
     board.disableDragAndDrop();
 
     // Une opacité de 50% pour faire cool !
     $("#board > div > img").css({opacity: 0.5});
-
-    // On enlève la couleur du bouton abandonner
-    $('#informations > a.red').removeClass('red');
 }
 
 /**
@@ -236,9 +228,6 @@ board.initialize = function()
         board.addPiece(position, pieces[position]);
     }
 
-    // La partie peut commencer !
-    board.running = true;
-
     $('#board > div > img.piece_' + board.userColor).draggable({
         opacity: 0.8,
         revert:  'invalid',
@@ -263,7 +252,7 @@ board.initialize = function()
 
     if (board.userColor == 'black') {
         // C'est toujours le joueur blanc qui commence
-        switchPlayer();
+        chess.switchPlayer();
     } else {
         chess.setMessage('your_turn');
     }
@@ -271,7 +260,6 @@ board.initialize = function()
 
 $(document).ready(function() {
     board.resize();
-    board.initialize();
 });
 
 $(window).resize(function () {

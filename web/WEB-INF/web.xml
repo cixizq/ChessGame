@@ -16,6 +16,10 @@
         <servlet-name>JoinGame</servlet-name>
         <servlet-class>chess.JoinGame</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Update</servlet-name>
+        <servlet-class>chess.Update</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewGame</servlet-name>
         <url-pattern>/newgame</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>JoinGame</servlet-name>
         <url-pattern>/joingame</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Update</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

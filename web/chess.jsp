@@ -30,7 +30,7 @@
         </div>
 
         <div id="informations">
-            <a href="javascript:;" onclick="giveup()" class="button red large">Abandonner</a>
+            <a href="javascript:;" onclick="chess.giveup()" class="button red large">Abandonner</a>
 
             <div id="message">
             </div>

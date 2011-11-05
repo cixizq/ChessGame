@@ -13,6 +13,7 @@ public class Game
     protected List<Player> mPlayers;
     protected Movement mLastMovement;
     protected boolean mRunning;
+    protected boolean mEnded;
     protected Player mCurrentPlayer;
 
     public Game()
@@ -70,6 +71,7 @@ public class Game
 
     public void giveUp(Player player)
     {
+        mEnded = true;
     }
 
     /**
@@ -137,6 +139,21 @@ public class Game
     public String getId()
     {
         return mId.toString();
+    }
+
+    public boolean isRunning()
+    {
+        return mRunning;
+    }
+
+    public boolean isEnded()
+    {
+        return mEnded;
+    }
+
+    public void setEnded(boolean ended)
+    {
+        mEnded = ended;
     }
 
     /**
